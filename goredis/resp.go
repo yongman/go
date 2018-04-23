@@ -484,3 +484,23 @@ func (resp *RespWriter) WriteStr2BytesArray(ay []interface{}) error {
 		return err
 	}
 }
+
+func (resp *RespWriter) WriteBytesArray(ay [][]byte) error {
+	resp.bw.WriteByte('*')
+	if ay == nil {
+		resp.bw.Write(nullArray)
+		return resp.writeTerm()
+	} else {
+		resp.writeInteger(int64(len(ay)))
+		resp.writeTerm()
+
+		var err error
+		for i := 0; i < len(ay); i++ {
+			if err != nil {
+				return err
+			}
+			err = resp.WriteBulk(v)
+		}
+		return err
+	}
+}
