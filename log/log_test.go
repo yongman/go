@@ -16,6 +16,7 @@ func TestLogInfo(t *testing.T) {
 	SetLevel(DEBUG)
 
 	SetOutput(os.Stdout)
+	SetReportCaller()
 
 	Debug("debug %d", 1)
 	Info("info %d", 2)
