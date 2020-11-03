@@ -34,6 +34,22 @@ func BytesToUint16(n []byte) (uint16, error) {
 	return binary.BigEndian.Uint16(n), nil
 }
 
+func BytesToInt32(n []byte) (int32, error) {
+	if n == nil || len(n) < 4 {
+		return 0, ErrParams
+	}
+
+	return int32(binary.BigEndian.Uint32(n)), nil
+}
+
+func BytesToUint32(n []byte) (uint32, error) {
+	if n == nil || len(n) < 2 {
+		return 0, ErrParams
+	}
+
+	return binary.BigEndian.Uint32(n), nil
+}
+
 func BytesToUint64(n []byte) (uint64, error) {
 	if n == nil || len(n) < 8 {
 		return 0, ErrParams
@@ -61,6 +77,22 @@ func Uint16ToBytes1(dst []byte, n uint16) error {
 		return ErrParams
 	}
 	binary.BigEndian.PutUint16(dst, n)
+
+	return nil
+}
+
+func Uint32ToBytes(n uint32) ([]byte, error) {
+	b := make([]byte, 4)
+	binary.BigEndian.PutUint32(b, n)
+
+	return b, nil
+}
+
+func Uint32ToBytes1(dst []byte, n uint32) error {
+	if len(dst) < 4 {
+		return ErrParams
+	}
+	binary.BigEndian.PutUint32(dst, n)
 
 	return nil
 }

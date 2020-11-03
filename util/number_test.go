@@ -35,3 +35,17 @@ func TestStrByteToInt64(t *testing.T) {
 	nn, err := StrBytesToInt64([]byte(n))
 	fmt.Println(nn, err)
 }
+
+func TestUint32ToBytes(t *testing.T) {
+	var n uint32 = 1234
+	nn, err := Uint32ToBytes(n)
+	mm, _ := BytesToUint32(nn)
+	fmt.Println(nn, mm, err)
+}
+
+func TestBytesToUint32(t *testing.T) {
+	num := "1234"
+	numBytes := []byte(num)
+	nn, err := BytesToUint32(numBytes)
+	fmt.Println(nn, err)
+}
